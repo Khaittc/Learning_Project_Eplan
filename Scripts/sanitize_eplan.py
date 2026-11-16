@@ -53,7 +53,8 @@ def sanitize_text(text: str, config: dict) -> str:
     text = re.sub(r'Khung_[A-Za-z0-9_]+', "Khung_A3_STANDARD", text)
     text = re.sub(r'FormTtitle_Page_[A-Za-z0-9_]+', "FormTitle_STANDARD", text)
 
-    # 4. Chuẩn hóa đường dẫn ổ đĩa tuyệt đối (C:\..., D:\...)
+    # 4. Chuẩn hóa đường dẫn ổ đĩa tuyệt đối (C:\..., D:\...) và user profile
+    text = re.sub(r'[A-Za-z]:\\Users\\[^\\]+\\', r'C:\\Users\\Default\\', text, flags=re.IGNORECASE)
     text = re.sub(r'[A-Za-z]:\\(?:[^\\/:*?"<>|\r\n]+\\)+([a-zA-Z0-9_\-]+\.elk)', r'C:\\EPLAN\\Projects\\Standard_Project.elk', text)
     text = re.sub(r'[A-Za-z]:\\(?:[^\\/:*?"<>|\r\n]+\\)+([a-zA-Z0-9_\-]+\.alk)', r'C:\\EPLAN\\Data\\Parts\\Standard_Parts.alk', text)
 
@@ -86,6 +87,8 @@ def sanitize_xml_like(src_file: Path, dst_file: Path, config: dict):
     sanitized = re.sub(r"<WriterID>[^<]*</WriterID>", "<WriterID>EPLAN_USER</WriterID>", sanitized)
     sanitized = re.sub(r"<WriterProjectTitle>[^<]*</WriterProjectTitle>", "<WriterProjectTitle>SAMPLE_PROJECT</WriterProjectTitle>", sanitized)
     sanitized = re.sub(r"<WriterProjectID>[^<]*</WriterProjectID>", "<WriterProjectID>SAMPLE_PROJECT</WriterProjectID>", sanitized)
+    sanitized = re.sub(r'(<Attribute Name="ProjectManufacturer"[^>]*>\s*<Value>)[^<]*(</Value>)', r'\g<1>EPLAN_ENGINEER\g<2>', sanitized)
+    sanitized = re.sub(r'(<Attribute Name="ProjectSign"[^>]*>\s*<Value>)[^<]*(</Value>)', r'\g<1>PROJECT_SIGN\g<2>', sanitized)
 
     # Gỡ bỏ đường dẫn máy thiết kế trong file EDC External Editing
     sanitized = re.sub(r'SourceProject="[^"]*"', r'SourceProject="C:\\EPLAN\\Projects\\Standard_Project.elk"', sanitized)

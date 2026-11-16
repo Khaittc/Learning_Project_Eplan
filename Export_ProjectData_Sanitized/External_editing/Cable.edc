@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<EplanPxfRoot Name="~data_configurator" Type="DataConfiguratorMacro" Version="2022.0.17561" PxfVersion="1.23" SchemaVersion="1.7.17561" Source="" SourceProject="C:\EPLAN\Projects\Standard_Project.elk" Description="" ConfigurationFlags="9153" NumMainObjects="13" NumProjectSteps="13" NumMDSteps="0" StreamSchema="EBitmap, ,2,1,2;EPosition3D, ,0,3,2;ERay3D, ,0,4,2;EStreamableVector, ,0,5,2;BaseTextLine@W3D, ,2,9,2;Box3d@W3D, ,0,10,2;DMNCDataSet, ,1,12,2;DMNCDataSetVector, ,1,13,2;Linetype@W3D, ,0,15,2;Color@W3D, ,0,16,2;Material@W3D, ,3,17,2;Mesh3d@W3D, ,8,19,2;Mesh3dX@W3D, ,2,20,2;MeshBox@W3D, ,5,21,2;MeshEdge3d@W3D, ,0,22,2;MeshFace3d@W3D, ,2,23,2;MeshPoint3d@W3D, ,1,24,2;MeshPolygon3d@W3D, ,1,25,2;MeshSimpleTextureTriangle3d@W3D, ,2,26,2;MeshSimpleTriangle3d@W3D, ,1,27,2;MeshText3dX@W3D, ,0,28,2;MeshTriangle3d@W3D, ,2,29,2;MeshTriangleFace3d@W3D, ,0,30,2;MeshTriangleFaceEdge3D@W3D, ,0,31,2;CTexture@W3D,W3dBaseGeometry,0,83,2;MeshMate@W3D,W3dMeshModeller,7,84,2;MeshMateFace@W3D,W3dMeshModeller,1,85,2;MeshMateGrid@W3D,W3dMeshModeller,8,86,2;MeshMateGridLine@W3D,W3dMeshModeller,1,87,2;MeshMateLine@W3D,W3dMeshModeller,1,88,2">
+ <DataConfiguration languages="en_US">
+  <XMemberDataEntry Name="A1" ID="60001" Readonly="0" Description=""/>
+  <XMemberDataEntry Name="A1383" ID="61383" Readonly="0" Description="Function definition"/>
+  <XMemberDataEntry Name="A1382" ID="61382" Readonly="0" Description="Function group"/>
+  <XMemberDataEntry Name="A1381" ID="61381" Readonly="0" Description="Function category"/>
+  <XPropertyEntry Name="P20006" RelationId="0" RelationIndex="0" ID="20006" Index="0" IdentName="" Readonly="1" Description="DT (full)"/>
+  <XPropertyEntry Name="P20010" RelationId="0" RelationIndex="0" ID="20010" Index="0" IdentName="" Readonly="0" Description="DT (displayed)"/>
+  <XPropertyEntry Name="M20011" RelationId="0" RelationIndex="0" ID="20011" Index="0" IdentName="" Readonly="0" Description="Function text"/>
+  <XPropertyEntry Name="P20100_1" RelationId="0" RelationIndex="0" ID="20100" Index="1" IdentName="" Readonly="0" Description="Part number"/>
+  <XPropertyEntry Name="P20102_1" RelationId="0" RelationIndex="0" ID="20102" Index="1" IdentName="" Readonly="0" Description="Number of units / quantity"/>
+  <XPropertyEntry Name="P20040" RelationId="0" RelationIndex="0" ID="20040" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Type"/>
+  <XPropertyEntry Name="P20071" RelationId="0" RelationIndex="0" ID="20071" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Number of connections, cross-section / diameter with unit"/>
+  <XPropertyEntry Name="P20044" RelationId="0" RelationIndex="0" ID="20044" Index="0" IdentName="" Readonly="0" Description="Cables: Voltage"/>
+ </DataConfiguration>
+ <O17 Build="17561" A1="17/47213" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W1" P20010="-4W1" P20100_1="TT.6x0.5-C" P20102_1="1" P20040="6x0.5 mm²" P20071="6x0.5 mm²" P20044="">
+ <M20011>
+ <T lang="en_US">From Control Box To LID-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47251" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W2" P20010="-4W2" P20100_1="TT.10x0.5-N" P20102_1="1" P20040="10x0.5 mm²" P20071="10x0.5 mm²" P20044="">
+ <M20011>
+ <T lang="en_US">From LID-103 &#10;To JB-FL103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47575" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W2" P20010="-4W2" P20100_1="" P20102_1="" P20040="" P20071="" P20044="">
+ <M20011>
+ <T lang="en_US">From  LID-103 To JB-FL103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47696" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W2" P20010="-4W2" P20100_1="" P20102_1="" P20040="" P20071="" P20044="">
+ <M20011>
+ <T lang="en_US">From  LID-103 To JB-FL103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/46517" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W1" P20010="-5W1" P20100_1="CADIVI.CVV-3x2.5" P20102_1="1" P20040="CVV-3X2.5 mm2 – 0.6/1kV" P20071="3x2.5 mm²" P20044="600/1kV">
+ <M20011>
+ <T lang="en_US">MOTOR</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/46298" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W2" P20010="-5W2" P20100_1="" P20102_1="" P20040="" P20071="" P20044="">
+ <M20011>
+ <T lang="en_US">From  CPT-103  to LID-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/46292" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W2" P20010="-5W2" P20100_1="San.10x0.5" P20102_1="1" P20040="10x0.5mm²" P20071="10x0.5 mm²" P20044="">
+ <M20011>
+ <T lang="en_US">From  CPT-103  to LID-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47271" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="5W3" P20100_1="TT.30x0.5-N" P20102_1="1" P20040="30x0.5 mm²" P20071="30x0.5 mm²" P20044="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47306" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47673" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47683" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47691" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47790" A1383="1" A1382="1" A1381="400" P20006="=ST101+-9W1" P20010="-9W1" P20100_1="LION.CY-2x0.5" P20102_1="1" P20040="CY-2x0.5mm²" P20071="2x0.5 mm²" P20044="300/500V">
+ <M20011>
+ <T lang="en_US">LS-DOOR</T>
+ </M20011>
+ </O17>
+</EplanPxfRoot>

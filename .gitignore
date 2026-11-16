@@ -1,6 +1,5 @@
-# Exclude all Eplan exports and project source data
+# Exclude raw unsanitized Eplan project data
 Export_ProjectData/
-Export_ProjectData_Sanitized/
 Source_Eplan/
 
 # Python / OS temporary files

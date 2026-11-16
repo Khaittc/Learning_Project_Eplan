@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<EplanPxfRoot Name="~data_configurator" Type="DataConfiguratorMacro" Version="2022.0.17561" PxfVersion="1.23" SchemaVersion="1.7.17561" Source="" SourceProject="C:\EPLAN\Projects\Standard_Project.elk" Description="" ConfigurationFlags="9153" NumMainObjects="13" NumProjectSteps="13" NumMDSteps="0" StreamSchema="EBitmap, ,2,1,2;EPosition3D, ,0,3,2;ERay3D, ,0,4,2;EStreamableVector, ,0,5,2;BaseTextLine@W3D, ,2,9,2;Box3d@W3D, ,0,10,2;DMNCDataSet, ,1,12,2;DMNCDataSetVector, ,1,13,2;Linetype@W3D, ,0,15,2;Color@W3D, ,0,16,2;Material@W3D, ,3,17,2;Mesh3d@W3D, ,8,19,2;Mesh3dX@W3D, ,2,20,2;MeshBox@W3D, ,5,21,2;MeshEdge3d@W3D, ,0,22,2;MeshFace3d@W3D, ,2,23,2;MeshPoint3d@W3D, ,1,24,2;MeshPolygon3d@W3D, ,1,25,2;MeshSimpleTextureTriangle3d@W3D, ,2,26,2;MeshSimpleTriangle3d@W3D, ,1,27,2;MeshText3dX@W3D, ,0,28,2;MeshTriangle3d@W3D, ,2,29,2;MeshTriangleFace3d@W3D, ,0,30,2;MeshTriangleFaceEdge3D@W3D, ,0,31,2;CTexture@W3D,W3dBaseGeometry,0,83,2;MeshMate@W3D,W3dMeshModeller,7,84,2;MeshMateFace@W3D,W3dMeshModeller,1,85,2;MeshMateGrid@W3D,W3dMeshModeller,8,86,2;MeshMateGridLine@W3D,W3dMeshModeller,1,87,2;MeshMateLine@W3D,W3dMeshModeller,1,88,2">
+ <DataConfiguration languages="en_US">
+  <XMemberDataEntry Name="A1" ID="60001" Readonly="0" Description=""/>
+  <XMemberDataEntry Name="A1383" ID="61383" Readonly="0" Description="Function definition"/>
+  <XMemberDataEntry Name="A1382" ID="61382" Readonly="0" Description="Function group"/>
+  <XMemberDataEntry Name="A1381" ID="61381" Readonly="0" Description="Function category"/>
+  <XPropertyEntry Name="P20006" RelationId="0" RelationIndex="0" ID="20006" Index="0" IdentName="" Readonly="1" Description="DT (full)"/>
+  <XPropertyEntry Name="P20010" RelationId="0" RelationIndex="0" ID="20010" Index="0" IdentName="" Readonly="0" Description="DT (displayed)"/>
+  <XPropertyEntry Name="M20011" RelationId="0" RelationIndex="0" ID="20011" Index="0" IdentName="" Readonly="0" Description="Function text"/>
+  <XPropertyEntry Name="P20100_1" RelationId="0" RelationIndex="0" ID="20100" Index="1" IdentName="" Readonly="0" Description="Part number"/>
+  <XPropertyEntry Name="P20102_1" RelationId="0" RelationIndex="0" ID="20102" Index="1" IdentName="" Readonly="0" Description="Number of units / quantity"/>
+  <XPropertyEntry Name="P20040" RelationId="0" RelationIndex="0" ID="20040" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Type"/>
+  <XPropertyEntry Name="P20071" RelationId="0" RelationIndex="0" ID="20071" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Number of connections, cross-section / diameter with unit"/>
+  <XPropertyEntry Name="P20044" RelationId="0" RelationIndex="0" ID="20044" Index="0" IdentName="" Readonly="0" Description="Cables: Voltage"/>
+  <XPropertyEntry Name="P20125" RelationId="0" RelationIndex="0" ID="20125" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Alternative cross-section / diameter"/>
+  <XPropertyEntry Name="P20127" RelationId="0" RelationIndex="0" ID="20127" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Alternative cross-section / diameter with unit"/>
+  <XPropertyEntry Name="P20043" RelationId="0" RelationIndex="0" ID="20043" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Cross-section / diameter"/>
+  <XPropertyEntry Name="P20070" RelationId="0" RelationIndex="0" ID="20070" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Cross-section / diameter with unit"/>
+  <XPropertyEntry Name="M20067" RelationId="0" RelationIndex="0" ID="20067" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Designation in graphic"/>
+  <XPropertyEntry Name="P20257" RelationId="0" RelationIndex="0" ID="20257" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Length (full)"/>
+  <XPropertyEntry Name="P20078" RelationId="0" RelationIndex="0" ID="20078" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Length in unit of the project"/>
+  <XPropertyEntry Name="P20041" RelationId="0" RelationIndex="0" ID="20041" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Length with unit"/>
+  <XPropertyEntry Name="P20079" RelationId="0" RelationIndex="0" ID="20079" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Length with unit of project"/>
+  <XPropertyEntry Name="P20042" RelationId="0" RelationIndex="0" ID="20042" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Number of connections"/>
+  <XPropertyEntry Name="P20053" RelationId="0" RelationIndex="0" ID="20053" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Number of connections and cross-section / diameter"/>
+  <XPropertyEntry Name="P20072" RelationId="0" RelationIndex="0" ID="20072" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Number of connections, cross-section / diameter with unit, length with unit"/>
+  <XPropertyEntry Name="P20080" RelationId="0" RelationIndex="0" ID="20080" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Screw connection size"/>
+  <XPropertyEntry Name="P20081" RelationId="0" RelationIndex="0" ID="20081" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Source: Stripping length"/>
+  <XPropertyEntry Name="P20082" RelationId="0" RelationIndex="0" ID="20082" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Target: Stripping length"/>
+  <XPropertyEntry Name="P20073" RelationId="0" RelationIndex="0" ID="20073" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Type, number of connections, cross-section / diameter with unit"/>
+  <XPropertyEntry Name="P20074" RelationId="0" RelationIndex="0" ID="20074" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Type, number of connections, cross-section / diameter with unit, length with unit"/>
+  <XPropertyEntry Name="P20126" RelationId="0" RelationIndex="0" ID="20126" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Unit for alternative cross-section / diameter"/>
+  <XPropertyEntry Name="P20068" RelationId="0" RelationIndex="0" ID="20068" Index="0" IdentName="" Readonly="0" Description="Cable / Conduit: Unit for cross-section / diameter"/>
+  <XPropertyEntry Name="P20124" RelationId="0" RelationIndex="0" ID="20124" Index="0" IdentName="" Readonly="1" Description="Cable / Conduit: Unit for cross-section / diameter (automatic)"/>
+  <XPropertyEntry Name="P20092" RelationId="0" RelationIndex="0" ID="20092" Index="0" IdentName="" Readonly="0" Description="Cable assignment diagram form"/>
+  <XPropertyEntry Name="P20083" RelationId="0" RelationIndex="0" ID="20083" Index="0" IdentName="" Readonly="0" Description="Cable diagram form"/>
+  <XPropertyEntry Name="P20069" RelationId="0" RelationIndex="0" ID="20069" Index="0" IdentName="" Readonly="0" Description="Cable name includes source / target"/>
+  <XPropertyEntry Name="P20084" RelationId="0" RelationIndex="0" ID="20084" Index="0" IdentName="" Readonly="0" Description="Cable-connection diagram form"/>
+  <XPropertyEntry Name="P20243" RelationId="0" RelationIndex="0" ID="20243" Index="0" IdentName="" Readonly="0" Description="Cables: Connection point length source"/>
+  <XPropertyEntry Name="P20246" RelationId="0" RelationIndex="0" ID="20246" Index="0" IdentName="" Readonly="0" Description="Cables: Connection point length target"/>
+  <XPropertyEntry Name="P20064" RelationId="0" RelationIndex="0" ID="20064" Index="0" IdentName="" Readonly="0" Description="Cables: Exchange source and target"/>
+  <XPropertyEntry Name="P20376" RelationId="0" RelationIndex="0" ID="20376" Index="0" IdentName="" Readonly="1" Description="Cables: Source"/>
+  <XPropertyEntry Name="P20383" RelationId="0" RelationIndex="0" ID="20383" Index="0" IdentName="" Readonly="1" Description="Cables: Source (with plug designation)"/>
+  <XPropertyEntry Name="P20377" RelationId="0" RelationIndex="0" ID="20377" Index="0" IdentName="" Readonly="1" Description="Cables: Target"/>
+  <XPropertyEntry Name="P20385" RelationId="0" RelationIndex="0" ID="20385" Index="0" IdentName="" Readonly="1" Description="Cables: Target (with plug designation)"/>
+  <XPropertyEntry Name="P20066" RelationId="0" RelationIndex="0" ID="20066" Index="0" IdentName="" Readonly="0" Description="Special cable"/>
+ </DataConfiguration>
+ <O17 Build="17561" A1="17/47213" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W1" P20010="-4W1" P20100_1="TT.6x0.5-C" P20102_1="1" P20040="6x0.5 mm²" P20071="6x0.5 mm²" P20044="" P20125="" P20127="" P20043="0.5" P20070="0.5 mm²" P20257="" P20078="" P20041="" P20079="" P20042="6" P20053="6x0.5" P20072="6x0.5 mm²" P20080="" P20081="" P20082="" P20073="6x0.5 mm² 6x0.5 mm²" P20074="6x0.5 mm² 6x0.5 mm²" P20126="" P20068="1" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-INPUT" P20383="=ST101+JB01-INPUT" P20377="=ST101+CT01-4S1" P20385="=ST101+CT01-4S1" P20066="">
+ <M20011>
+ <T lang="en_US">From Control Box To LID-103</T>
+ </M20011>
+ <M20067>
+ <T lang="en_US">Shielded Cable-Cu/PVC/PVC, CY-6x1.25mm2, 300/500V, TCVN 6610-7</T>
+ </M20067>
+ </O17>
+ <O17 Build="17561" A1="17/47251" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W2" P20010="-4W2" P20100_1="TT.10x0.5-N" P20102_1="1" P20040="10x0.5 mm²" P20071="10x0.5 mm²" P20044="" P20125="" P20127="" P20043="0.5" P20070="0.5 mm²" P20257="" P20078="" P20041="" P20079="" P20042="10" P20053="10x0.5" P20072="10x0.5 mm²" P20080="" P20081="" P20082="" P20073="10x0.5 mm² 10x0.5 mm²" P20074="10x0.5 mm² 10x0.5 mm²" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ET101+DDC-103-2K1" P20383="=ET101+DDC-103-2K1-X12" P20377="=ST101+JB01-4K1" P20385="=ST101+JB01-4K1" P20066="">
+ <M20011>
+ <T lang="en_US">From LID-103 &#10;To JB-FL103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47575" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W2" P20010="-4W2" P20100_1="" P20102_1="" P20040="" P20071="" P20044="" P20125="" P20127="" P20043="" P20070="" P20257="" P20078="" P20041="" P20079="" P20042="" P20053="" P20072="" P20080="" P20081="" P20082="" P20073="" P20074="" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ET101+DDC-103-2K1" P20383="=ET101+DDC-103-2K1-X12" P20377="=ST101+JB01-4K1" P20385="=ST101+JB01-4K1" P20066="">
+ <M20011>
+ <T lang="en_US">From  LID-103 To JB-FL103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47696" A1383="1" A1382="1" A1381="400" P20006="=ST101+-4W2" P20010="-4W2" P20100_1="" P20102_1="" P20040="" P20071="" P20044="" P20125="" P20127="" P20043="" P20070="" P20257="" P20078="" P20041="" P20079="" P20042="" P20053="" P20072="" P20080="" P20081="" P20082="" P20073="" P20074="" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ET101+DDC-103-2K1" P20383="=ET101+DDC-103-2K1-X12" P20377="=ST101+JB01-4K1" P20385="=ST101+JB01-4K1" P20066="">
+ <M20011>
+ <T lang="en_US">From  LID-103 To JB-FL103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/46517" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W1" P20010="-5W1" P20100_1="CADIVI.CVV-3x2.5" P20102_1="1" P20040="CVV-3X2.5 mm2 – 0.6/1kV" P20071="3x2.5 mm²" P20044="600/1kV" P20125="" P20127="" P20043="2.5" P20070="2.5 mm²" P20257="" P20078="" P20041="" P20079="" P20042="3" P20053="3x2.5" P20072="3x2.5 mm²" P20080="" P20081="" P20082="" P20073="CVV-3X2.5 mm2 – 0.6/1kV 3x2.5 mm²" P20074="CVV-3X2.5 mm2 – 0.6/1kV 3x2.5 mm²" P20126="" P20068="1" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=CPT-103+A-5FR1" P20383="=CPT-103+A-5FR1" P20377="=ST101+FD-5M1" P20385="=ST101+FD-5M1" P20066="">
+ <M20011>
+ <T lang="en_US">MOTOR</T>
+ </M20011>
+ <M20067>
+ <T lang="en_US">CVV-3X1.5 mm2 – 0.6/1kV Cu/PVC/PVC</T>
+ </M20067>
+ </O17>
+ <O17 Build="17561" A1="17/46298" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W2" P20010="-5W2" P20100_1="" P20102_1="" P20040="" P20071="" P20044="" P20125="" P20127="" P20043="" P20070="" P20257="" P20078="" P20041="" P20079="" P20042="" P20053="" P20072="" P20080="" P20081="" P20082="" P20073="" P20074="" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-INPUT" P20383="=ST101+JB01-INPUT" P20377="=CPT-103+A-5FR1" P20385="=CPT-103+A-5FR1" P20066="">
+ <M20011>
+ <T lang="en_US">From  CPT-103  to LID-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/46292" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W2" P20010="-5W2" P20100_1="San.10x0.5" P20102_1="1" P20040="10x0.5mm²" P20071="10x0.5 mm²" P20044="" P20125="" P20127="" P20043="0.5" P20070="0.5 mm²" P20257="" P20078="" P20041="" P20079="" P20042="10" P20053="10x0.5" P20072="10x0.5 mm²" P20080="" P20081="" P20082="" P20073="10x0.5mm² 10x0.5 mm²" P20074="10x0.5mm² 10x0.5 mm²" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-INPUT" P20383="=ST101+JB01-INPUT" P20377="=CPT-103+A-5FR1" P20385="=CPT-103+A-5FR1" P20066="">
+ <M20011>
+ <T lang="en_US">From  CPT-103  to LID-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47271" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="5W3" P20100_1="TT.30x0.5-N" P20102_1="1" P20040="30x0.5 mm²" P20071="30x0.5 mm²" P20044="" P20125="" P20127="" P20043="0.5" P20070="0.5 mm²" P20257="" P20078="" P20041="" P20079="" P20042="30" P20053="30x0.5" P20072="30x0.5 mm²" P20080="" P20081="" P20082="" P20073="30x0.5 mm² 30x0.5 mm²" P20074="30x0.5 mm² 30x0.5 mm²" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-OUTPUT" P20383="=ST101+JB01-OUTPUT" P20377="=ET101+DDC-103-2K1" P20385="=ET101+DDC-103-2K1-X13" P20066="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47306" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="" P20125="" P20127="" P20043="" P20070="" P20257="" P20078="" P20041="" P20079="" P20042="" P20053="" P20072="" P20080="" P20081="" P20082="" P20073="" P20074="" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-OUTPUT" P20383="=ST101+JB01-OUTPUT" P20377="=ET101+DDC-103-2K1" P20385="=ET101+DDC-103-2K1-X13" P20066="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47673" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="" P20125="" P20127="" P20043="" P20070="" P20257="" P20078="" P20041="" P20079="" P20042="" P20053="" P20072="" P20080="" P20081="" P20082="" P20073="" P20074="" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-OUTPUT" P20383="=ST101+JB01-OUTPUT" P20377="=ET101+DDC-103-2K1" P20385="=ET101+DDC-103-2K1-X13" P20066="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47683" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="" P20125="" P20127="" P20043="" P20070="" P20257="" P20078="" P20041="" P20079="" P20042="" P20053="" P20072="" P20080="" P20081="" P20082="" P20073="" P20074="" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-OUTPUT" P20383="=ST101+JB01-OUTPUT" P20377="=ET101+DDC-103-2K1" P20385="=ET101+DDC-103-2K1-X13" P20066="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47691" A1383="1" A1382="1" A1381="400" P20006="=ST101+-5W3" P20010="-5W3" P20100_1="" P20102_1="" P20040="" P20071="" P20044="" P20125="" P20127="" P20043="" P20070="" P20257="" P20078="" P20041="" P20079="" P20042="" P20053="" P20072="" P20080="" P20081="" P20082="" P20073="" P20074="" P20126="" P20068="" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-OUTPUT" P20383="=ST101+JB01-OUTPUT" P20377="=ET101+DDC-103-2K1" P20385="=ET101+DDC-103-2K1-X13" P20066="">
+ <M20011>
+ <T lang="en_US">From  JB-LID to FILL-103</T>
+ </M20011>
+ </O17>
+ <O17 Build="17561" A1="17/47790" A1383="1" A1382="1" A1381="400" P20006="=ST101+-9W1" P20010="-9W1" P20100_1="LION.CY-2x0.5" P20102_1="1" P20040="CY-2x0.5mm²" P20071="2x0.5 mm²" P20044="300/500V" P20125="" P20127="" P20043="0.5" P20070="0.5 mm²" P20257="" P20078="" P20041="" P20079="" P20042="2" P20053="2x0.5" P20072="2x0.5 mm²" P20080="" P20081="" P20082="" P20073="CY-2x0.5mm² 2x0.5 mm²" P20074="CY-2x0.5mm² 2x0.5 mm²" P20126="" P20068="1" P20124="mm²" P20092="" P20083="" P20069="" P20084="" P20243="" P20246="" P20064="" P20376="=ST101+JB01-24VDC" P20383="=ST101+JB01-24VDC" P20377="=ST101+FD-9S4" P20385="=ST101+FD-9S4" P20066="">
+ <M20011>
+ <T lang="en_US">LS-DOOR</T>
+ </M20011>
+ <M20067>
+ <T lang="en_US">Shielded Cable-Cu/PVC/PVC, CY-2x0.5mm2, 300/500V, TCVN 6610-7</T>
+ </M20067>
+ </O17>
+</EplanPxfRoot>
