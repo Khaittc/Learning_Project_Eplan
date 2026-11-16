@@ -1,0 +1,12 @@
+# Exclude all Eplan exports and project source data
+Export_ProjectData/
+Export_ProjectData_Sanitized/
+Source_Eplan/
+
+# Python / OS temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+*.tmp
+.DS_Store
+Thumbs.db

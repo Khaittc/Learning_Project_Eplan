@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Cấu hình làm sạch tự động theo TRƯỜNG DỮ LIỆU (Field-based). Người dùng KHÔNG CẦN điền tên cụ thể.",
+  "mode": "field_based",
+  "eplan_fields_to_anonymize": {
+    "project_properties": [
+      "P10013", "P10014", "P10015", "P10016", "P10017",
+      "P10020", "P10022", "P10025", "P10045", "P10185",
+      "P10517", "P10518"
+    ],
+    "page_properties": [
+      "P11016", "P11020", "P11022", "P11067", "P11080", "P11082"
+    ],
+    "customer_id_ranges": [
+      {"start": 10100, "end": 10147},
+      {"start": 10230, "end": 10247}
+    ]
+  },
+  "default_placeholders": {
+    "P10020": "EPLAN_ENGINEER",
+    "P10022": "EPLAN_ENGINEER",
+    "P11020": "EPLAN_PAGE_USER",
+    "P11022": "EPLAN_PAGE_USER",
+    "P10185": "LIC_ANONYMOUS",
+    "P10013": "JOB_STANDARD_001",
+    "P10014": "",
+    "P11016": "Khung_A3_STANDARD",
+    "P11067": "PROJECT_SAMPLE_ORIGIN",
+    "generic_customer": "CUSTOMER_STANDARD",
+    "generic_user": "ANONYMOUS_USER"
+  },
+  "known_manufacturer_logo_whitelist": [
+    "airtac", "autonics", "omron", "smc", "se_", "schneider", 
+    "siemens", "mitsubishi", "festo", "keyence", "sick", 
+    "phoenix", "abb", "ls", "delta", "weidmuller"
+  ],
+  "optional_keyword_blacklist": []
+}
