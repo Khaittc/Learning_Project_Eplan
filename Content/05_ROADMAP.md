@@ -39,6 +39,9 @@ Lập ca kiểm chứng riêng cho sơ đồ điện nhiều/single-line, PLC, k
 
 Chỉ tạo parser/script khi cùng thao tác đã lặp lại đủ để cần kết quả nhất quán: đọc XML/AML/EDC, nối ID, kiểm tra snapshot, xuất bảng chứng cứ. Chạy thử trên ca TTC và project khác khi có. **Hoàn tất khi** kết quả máy tạo khớp các ca mẫu, báo thiếu dữ liệu thay vì đoán, và dẫn được tới bản ghi nguồn.
 
+- **EDT-005/F04 — APPROVED (rule):** Cable Route default Source Location → Target Location; raw endpoints preserved. Acceptance test for automatic location resolution and per-core joins remains PARTIAL. See [Cable Route rules](13_CABLE_ROUTE_LOCATION_RULES.md) and [EDT-005](../Tests/EDT-005_CABLE_ROUTE_AND_CORE_VALIDATION.md).
+- **EDT-009 — PENDING RE-TEST:** Re-export and compare BOM Object IDs after reopen, edit, copy, and delete/recreate; do not claim stable cross-snapshot object keys before evidence. See [EDT-009](../Tests/EDT-009_OBJECT_ID_STABILITY.md).
+
 ## Quy tắc cập nhật roadmap
 
 Sau mỗi ca mới: ghi phát hiện vào [nhật ký](06_LEARNING_LOG.md), cập nhật skill hoặc bản đồ trường nếu quy tắc dùng lại được, rồi đổi trạng thái hạng mục liên quan ở đây. Một xác nhận bằng lời của người dùng giúp đánh giá suy luận nhưng không thay thế chứng cứ liên kết trực tiếp trong export.

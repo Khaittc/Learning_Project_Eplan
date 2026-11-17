@@ -6,3 +6,4 @@
 - Trước khi kết luận, phân biệt: thuộc tính/liên kết trực tiếp, suy luận từ bố cục, và thông tin chưa xác nhận. Ghi đúng file export và phiên bản/snapshot đã dùng.
 - Nếu phát hiện quy tắc tra cứu có thể dùng lại, cập nhật `Skills/eplan-source-analysis/SKILL.md` hoặc `Content/02_PROPERTY_MAP.md`. Nếu là phát hiện riêng của TTC, cập nhật ca trong `Content/` và [nhật ký học được](Content/06_LEARNING_LOG.md). Nếu thay đổi năng lực còn thiếu, cập nhật [roadmap](Content/05_ROADMAP.md).
 - Không sửa hoặc di chuyển source Eplan và file export chỉ để làm đẹp bố cục tài liệu.
+- Khi nhận kết quả từ Technical Tester: `PROPOSED/PENDING APPROVAL` chỉ được ghi ở test backlog, không nâng thành quy tắc kỹ thuật trong Skill/Property Map. Chỉ `APPROVED` từ project owner mới được cập nhật thành quy tắc chuẩn. Giữ riêng `test execution status` (`PASS/PARTIAL/FAIL/UNVERIFIED`) và `review status` (`PENDING/APPROVED/REJECTED`), đồng thời ghi commit/snapshot của chứng cứ.

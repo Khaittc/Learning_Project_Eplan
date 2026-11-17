@@ -16,6 +16,7 @@ Trước khi đọc source/export của TTC, kiểm tra [trạng thái dữ li�
 3. Với dây, chỉ lấy tên ống lồng từ `Connection designation` của `Conductor/Wire`; lấy màu/số từ `Color/Number`, tiết diện từ `Cross-section/Diameter`. Báo từng đoạn dây theo source và target, không gộp qua terminal.
 4. Với layout, phân biệt **loại đối tượng của thiết bị** và **vùng bao quanh nó**. Ưu tiên quan hệ trực tiếp như `Mounting panel (identifying)`; cùng trang, cùng ô placement, hoặc cùng tên là dấu hiệu để kiểm tra tiếp, chưa tự chứng minh quan hệ bao.
 5. Ghi kết quả cùng đường dẫn nguồn và trạng thái chứng cứ: `trực tiếp`, `suy luận có cơ sở`, hoặc `chưa xác nhận`. Nêu rõ thuộc tính còn thiếu nếu câu hỏi cần tọa độ hay quan hệ hình học.
+6. Khi hỏi **tuyến cáp**, mặc định trả lời `Cable DT | Source Location | Target Location` theo quyết định `EDT-005/F04 APPROVED`; đồng thời giữ nguyên `Cable Source/Target` ở cấp Device (`20376/20377`) cho truy vết và tách riêng Endpoint Device/Pin của từng Core. Đọc [Cable Route addendum](CABLE_ROUTE_ADDENDUM.md); không tách Location từ DT bằng dấu `-` đơn giản.
 
 ## Tích lũy kiến thức sau truy vấn
 
@@ -35,6 +36,8 @@ Khi một truy vấn làm rõ thêm cách đọc Eplan, cập nhật tài liệu
 - [Tổ chức scheme External editing](../../Content/10_EXTERNAL_EDITING_SCHEMES.md)
 - [Báo cáo trích xuất Wiring.epdz và lõi cáp](../../Content/11_WIRING_EPDZ_EXTRACTION.md)
 - [Cấu hình Elements cho Scheme Cable](../../Content/12_CABLE_EXTERNAL_EDITING_ELEMENTS.md)
+- [Quy tắc tuyến cáp theo Location](../../Content/13_CABLE_ROUTE_LOCATION_RULES.md)
+- [Hướng dẫn truy vấn tuyến cáp (Addendum)](CABLE_ROUTE_ADDENDUM.md)
 - [Tổng hợp cốt lõi dự án](../../Content/00_PROJECT_OVERVIEW.md)
 
 Các đường dẫn trên là tài liệu riêng của project TTC; khi dùng skill cho project khác, thay chứng cứ ca mẫu bằng export của project đó.

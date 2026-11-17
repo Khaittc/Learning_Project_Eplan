@@ -14,6 +14,7 @@ Thư mục này dùng để tra cứu bản vẽ từ **dữ liệu Eplan**, đ�
 | [`Scripts/`](Scripts/) | Tracked | Bộ công cụ tự động hóa làm sạch dữ liệu export Eplan theo Schema (`sanitize_eplan.py`, `sanitize_config.json`). |
 | [`Part/`](Part/) | Tracked | Dữ liệu part rời do người dùng export (`ME-M-0001.xml`, `ME-M-0001_V2.xml`). |
 | [`Skills/eplan-source-analysis/`](Skills/eplan-source-analysis/) | Tracked | Skill tra cứu Eplan có thể tái sử dụng cho các dự án khác. |
+| [`Tests/`](Tests/) | Tracked | Hồ sơ kiểm chứng kỹ thuật và kế hoạch kiểm thử (EDT-005, EDT-009). |
 | [`AGENTS.md`](AGENTS.md) | Tracked | Điểm vào cho Agent và quy tắc cập nhật kiến thức sau mỗi phát hiện. |
 | `Export_ProjectData/` | Ignored | Thư mục export Eplan gốc của dự án (Lưu cục bộ, không commit lên Git vì chứa thông tin riêng). |
 | `Source_Eplan/` | Ignored | Project Eplan gốc native (`.edb`, `.elk`) nếu có (Lưu cục bộ, không commit lên Git). |
@@ -32,5 +33,7 @@ Thư mục này dùng để tra cứu bản vẽ từ **dữ liệu Eplan**, đ�
 10. Khi kiểm tra cáp và trạng thái lõi dùng/dư, dùng [báo cáo trích xuất Wiring.epdz](Content/11_WIRING_EPDZ_EXTRACTION.md).
 11. Khi làm sạch dữ liệu cho dự án mới, sử dụng công cụ tự động tại [`Scripts/sanitize_eplan.py`](Scripts/sanitize_eplan.py).
 12. Xem [tổng quan cốt lõi dự án](Content/00_PROJECT_OVERVIEW.md) để nắm nhanh toàn bộ cấu trúc.
+13. Khi tra cứu tuyến cáp theo Location, dùng [quy tắc tuyến cáp theo Location (EDT-005)](Content/13_CABLE_ROUTE_LOCATION_RULES.md).
+14. Xem hồ sơ kiểm thử cáp và lõi tại [EDT-005](Tests/EDT-005_CABLE_ROUTE_AND_CORE_VALIDATION.md) và kế hoạch kiểm chứng Object ID tại [EDT-009](Tests/EDT-009_OBJECT_ID_STABILITY.md).
 
 Skill tại [SKILL.md](Skills/eplan-source-analysis/SKILL.md) hướng dẫn cách áp dụng các tài liệu này cho câu hỏi mới.

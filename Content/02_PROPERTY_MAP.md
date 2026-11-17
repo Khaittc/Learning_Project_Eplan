@@ -26,4 +26,16 @@ Các ID dưới đây được thấy trong export TTC hoặc đã đối chiế
 - `Mounting panel (identifying)` là liên kết trực tiếp. Việc hai đối tượng nằm trên cùng trang hoặc cùng ô placement không chứng minh quan hệ chứa.
 - `Function text` của Black box CYL1 tại `07/1.8` rỗng; `Equipment Overview` là Function text của Mounting panel `1U1`.
 
+## Tuyến cáp và lõi cáp (Cable Route & Core)
+
+| Câu hỏi | Thuộc tính nguồn | Cách dùng |
+|---|---|---|
+| Tuyến cáp đi từ Location nào đến Location nào? | Cable `Source` / `20376`; `Target` / `20377` + cấu trúc Location của project | Giữ nguyên raw endpoints; chuẩn hóa sang `Source Location → Target Location` cho báo cáo. Location được derived phải xác nhận bằng structure index. |
+| Đầu cáp có plug? | `20383` / `20385` | Lưu riêng Source/Target có plug, không thay Location. |
+| Có bao nhiêu lõi thiết kế? | `20042` | Đếm một lần mỗi cable DT, không cộng các Cable Definition placements trùng DT. |
+| Lõi nối tới đâu? | Connection `31019` / `31020`, association đến Cable | Dữ liệu Device/Pin ở cấp Core/Connection; không dùng thay Route. |
+
+> [!NOTE]
+> **EDT-005/F04 APPROVED**. Dùng [13_CABLE_ROUTE_LOCATION_RULES.md](13_CABLE_ROUTE_LOCATION_RULES.md) làm tài liệu chuẩn (normative source). Độ ổn định Object ID (`EDT-009`) vẫn đang chờ bản export mới (`PENDING RE-TEST`).
+
 Nguồn tham chiếu ID thuộc tính Eplan: [Eplan Properties](https://eplan.help/en-us/Infoportal/Content/Plattform/2025/Content/htm/properties_o_main.htm).

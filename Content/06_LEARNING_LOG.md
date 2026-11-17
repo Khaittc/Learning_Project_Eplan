@@ -78,3 +78,12 @@ Mỗi mục cần nêu **phát hiện → chứng cứ → cách áp dụng → 
 - **Chứng cứ:** [Project.epj](../Export_ProjectData/Page/Project.epj), [Project.aml](../Export_ProjectData/Page/Project.aml), [EDC files](../Export_ProjectData/External_editing/), [Wiring.epdz](../Export_ProjectData/External_editing/Wiring.epdz), [Part/ME-M-0001.xml](../Part/ME-M-0001.xml).
 - **Áp dụng:** Khi quy trình khử dữ liệu riêng (sanitizing) được thực hiện, bắt buộc phải rà soát cả các trường tự do, khung bản vẽ (plot frame), header XML/EDC/AML, đường dẫn tài liệu đính kèm và tài nguyên đa phương tiện (ảnh logo), thay vì chỉ kiểm tra các thuộc tính Eplan mặc định.
 - **Giới hạn:** Nếu chỉ xuất file dạng văn bản mà không đổi plot frame / tiêu đề trang trong chính Eplan trước khi export, các siêu dữ liệu nhúng này vẫn sẽ tái sinh.
+
+## 2026-11-17 — EDT-005/F04: Cable Route theo Location (APPROVED)
+
+- **Quyết định đã phê duyệt:** Báo tuyến cáp ở cấp `Source Location → Target Location`. Giữ `P20376/P20377` (Source/Target Device gốc) và các field có plug để truy vết; Core Source/Target Device/Pin là một cấp khác.
+- **Chứng cứ:** `Export_ProjectData_Sanitized/External_editing/Cable_v2.edc`, commit `e459be0b6e588bb7795bf76211b84b8dfba97160`, ví dụ `5W1`: raw `=CPT-103+A-5FR1` → `=ST101+FD-5M1`, route `=CPT-103+A` → `=ST101+FD` (derived/approved display).
+- **Áp dụng:** Không tách chuỗi bằng dấu `-` đơn giản (ví dụ Location `+DDC-103`); ưu tiên structure identifier/validated location index. Gom cable theo Full DT, giữ nhiều placement riêng.
+- **Giới hạn:** Quy tắc trình bày route được APPROVED, nhưng việc tự động lấy Location và nối tới từng Core chưa được xác nhận toàn diện; xem [EDT-005](../Tests/EDT-005_CABLE_ROUTE_AND_CORE_VALIDATION.md).
+- **Chưa chốt:** EDT-009 về độ ổn định Object ID; chờ export mới. Các số Used/Spare từ `Wiring.epdz` đang chờ re-test độc lập.
+
