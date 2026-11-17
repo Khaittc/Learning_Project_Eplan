@@ -36,5 +36,6 @@ Thư mục này dùng để tra cứu bản vẽ từ **dữ liệu Eplan**, đ�
 12. Xem [tổng quan cốt lõi dự án](Content/00_PROJECT_OVERVIEW.md) để nắm nhanh toàn bộ cấu trúc.
 13. Khi tra cứu tuyến cáp theo Location, dùng [quy tắc tuyến cáp theo Location (EDT-005)](Content/13_CABLE_ROUTE_LOCATION_RULES.md).
 14. Xem hồ sơ kiểm thử cáp và lõi tại [EDT-005](Tests/EDT-005_CABLE_ROUTE_AND_CORE_VALIDATION.md) và kế hoạch kiểm chứng Object ID tại [EDT-009](Tests/EDT-009_OBJECT_ID_STABILITY.md).
+15. Xem bộ kiểm thử chẩn đoán sự cố Evidence & Safety Gate tại [EDT-010](Tests/EDT-010_TROUBLESHOOTING_V2_1_EVIDENCE_GATE.md) và đề xuất học tập tại [LL-006 & LL-007](Content/LL-006_LL-007_TROUBLESHOOTING_V2_1_PROPOSAL.md).
 
 Các skill tại [eplan-source-analysis](Skills/eplan-source-analysis/SKILL.md) và [eplan-troubleshooting](Skills/eplan-troubleshooting/SKILL.md) hướng dẫn cách áp dụng các tài liệu này cho câu hỏi tra cứu dữ liệu và xử lý sự cố.

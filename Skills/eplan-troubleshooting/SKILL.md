@@ -1,84 +1,121 @@
 ---
 name: eplan-troubleshooting
-description: Phân tích sự cố hệ thống tự động hóa và tủ điện từ mô tả hiện trường của người dùng, kết hợp dữ liệu sơ đồ nguyên lý Eplan, sơ đồ chân đấu nối (Connection.edc, Wiring.epdz) và tài liệu kỹ thuật thiết bị để xác định nguyên nhân gốc rễ và đề xuất quy trình khắc phục từng bước.
+description: "EMDS Troubleshooting V2.1 — Operation-first, evidence-gated, adaptive and safety-first diagnosis across user manuals, alarms/interlocks/sequences, mechanical/pneumatic conditions and EPLAN wiring. Stop and request exact missing documents instead of guessing."
+version: "2.1.0"
+status: "PROPOSED_PENDING_TECHNICAL_APPROVAL"
 ---
 
-# Kỹ năng Xử lý Sự cố & Chẩn đoán Lỗi Hệ thống (Troubleshooting)
+# EMDS Troubleshooting Skill — V2.1
 
-Kỹ năng này hướng dẫn Agent tiếp nhận hiện trạng sự cố từ người dùng (hiện tượng mắt thấy, trạng thái đèn LED, đo kiểm VOM, hành vi bất thường của máy), đối chiếu với thiết kế chi tiết trong các file Eplan export (`Connection.edc`, `Wiring.epdz`, `Device.edc`, `Bill_of_materials.XML`, `Project.aml`, `Project.epj`) để khoanh vùng nguyên nhân gốc rễ và đưa ra giải pháp xử lý chính xác theo từng chân cực thiết bị.
+> **CRITICAL / KHÔNG ĐƯỢC VI PHẠM:** Không có chứng cứ phù hợp thì **KHÔNG SUY LUẬN, KHÔNG HƯỚNG DẪN ĐO/THỬ/RESET THỬ, KHÔNG DẪN NGƯỜI DÙNG SANG MỘT NHÁNH CHẨN ĐOÁN KHÁC**. Nêu chính xác giới hạn, yêu cầu tài liệu hoặc dữ liệu còn thiếu, rồi **DỪNG**. Không có tài liệu là `NOT_AVAILABLE`, không phải bằng chứng cho bất kỳ nguyên nhân nào.
 
----
+## 0. Mục đích, phạm vi, ưu tiên
 
-## 1. Nguyên tắc vàng trong Troubleshooting
+- Vai trò: hỗ trợ nhân sự có thẩm quyền chẩn đoán trên cơ sở tài liệu của **đúng máy/đúng revision** và hiện trạng được xác minh; không thay thế thủ tục an toàn của nhà máy.
+- **Operation first** với hệ thống đã chạy ổn định: kiểm tra lịch sử lỗi, Alarm/HMI, điều kiện vận hành, Interlock, Sequence, Reset đã thực hiện hay chưa, cảm biến/cơ khí/khí nén trước khi mặc định lỗi đấu nối.
+- **Commissioning context**: khi máy vừa lắp đặt, thay đổi sơ đồ, thay PLC/I/O, thay cảm biến hoặc sửa dây, lỗi đấu nối/cấu hình có thể được ưu tiên **sau khi có bằng chứng và đủ điều kiện an toàn**.
+- Các ngoại lệ an toàn luôn ưu tiên: điện giật, cháy, khói, mùi khét, chuyển động bất ngờ, mất chức năng an toàn, áp suất hoặc năng lượng nguy hiểm → dừng vận hành, làm theo quy trình ứng phó và nhân sự được ủy quyền; **không Reset thử**.
+- Tất cả câu trả lời phải phân biệt **FACT FROM SOURCE**, **USER REPORTED**, **VERIFIED MEASUREMENT**, **UNKNOWN**, **HYPOTHESIS**. Giả thuyết chỉ dùng để chọn câu hỏi/tài liệu, **không được trình bày như kết luận** hay cơ sở cho thao tác rủi ro.
 
-1. **Không phán đoán cảm tính:** Mọi chẩn đoán phải dựa trên chuỗi đấu dây thực tế trong Eplan (`Source -> Target`, `Wire ID`, `Terminal ID`), không đưa ra lời khuyên chung chung.
-2. **Tách bạch tầng Logic và tầng Công suất:**
-   - *Tầng Logic/Truyền thông:* Ví dụ Backplane Bus $5\text{ V DC}$ của PLC nuôi chip vi xử lý của các module mở rộng.
-   - *Tầng Ngoại vi/Công suất:* Nguồn $24\text{ V DC}$ tại cọc $L+/M$ giắc `X10`, nguồn cấp tiếp điểm relay `1L/2L` tại giắc `X12`.
-   - Mất nguồn ngoại vi không làm sập tầng logic (CPU vẫn RUN, không báo mất module).
-3. **Phân tích theo hướng "Từ nguồn đến tải" (Downstream Traceability):** Lần theo thứ tự cấp điện (Aptomat $\rightarrow$ Rơ-le an toàn $\rightarrow$ Busbar $\rightarrow$ Khối phân phối $\rightarrow$ Cầu đấu $\rightarrow$ Thiết bị chấp hành).
-4. **Xác lập kịch bản theo xác suất thực tế:** Ưu tiên kiểm tra các vị trí cơ học dễ phát sinh lỗi trước (tuột cosse đôi tại chân cầu, lỏng ốc, đứt dây ngầm, nút E-stop bị ấn, kẹt hành trình) trước khi kết luận hỏng phần cứng hoặc lỗi phần mềm.
+## 1. Nguồn dữ liệu và giới hạn sử dụng
 
----
+| Nguồn | Được phép xác lập | KHÔNG được tự suy ra |
+|---|---|---|
+| System User / Operation Manual, đúng machine + revision | Mode, Start/Stop/Reset, sequence, điều kiện khởi động, quy trình phục hồi | Quy trình Reset nếu tài liệu chưa có/không nói rõ |
+| Alarm/Fault List + HMI history | Code, nghĩa, nguyên nhân/handling do tài liệu nêu, trạng thái latched | Ý nghĩa code, cách clear/reset từ tên alarm đơn lẻ |
+| Interlock / Permissive Matrix | Điều kiện logic ngăn/chấp thuận cơ cấu; nguồn tín hiệu | Điều kiện liên động từ LED hoặc từ tên tag |
+| Sequence of Operation / PLC I/O specification | Bước chu trình, điều kiện chuyển bước, output commanded/feedback | PLC logic/behavior không có tài liệu hoặc online evidence |
+| Mechanical / Pneumatic Drawings & Maintenance Manual | Cylinder/sensor location, điều kiện áp suất, vị trí cơ khí, cách kiểm tra được phép | Nguyên nhân kẹt/căn chỉnh hoặc thao tác chỉnh sensor khi chưa có chứng cứ |
+| EPLAN exports: Device.edc, Connection.edc, Wiring.epdz, AML/BOM | Full DT, part, pin, wire, terminal, source/target, connection as exported | Liên tục điện qua relay/contact; hướng dòng; chức năng chân; logic PLC; trạng thái tiếp điểm; vị trí thực không được xác minh |
+| Manufacturer manual **đúng Part No & revision** | Pin functions, LED behavior, diagnostics, limits, safe procedures | Chức năng từ chữ viết tắt, loại thiết bị suy từ DT |
+| Hiện trường/user | Triệu chứng và quan sát đã báo cáo | Coi báo cáo mơ hồ là phép đo đã xác minh |
 
-## 2. Quy trình chẩn đoán 5 bước chuẩn hóa
+**Hệ thống tài liệu tối thiểu tùy theo câu hỏi:**
+1. Đối với lỗi vận hành/Interlock/Alarm/Reset: cần **System User Manual**, phần **Alarm/Fault** và **Interlock/Sequence** liên quan (có thể nằm chung một tài liệu), cộng triệu chứng và điều kiện hiện trường.
+2. Đối với lỗi sensor/cylinder/khí nén: cần vận hành hoặc sequence liên quan, tài liệu sơ đồ/cấu tạo cơ khí/khí nén, mapping tag.
+3. Đối với lỗi điện: cần EPLAN export đủ chain, device/part và manual hãng khi cần xác định chức năng pin hay trạng thái nội bộ; cần mô tả điều kiện đo.
+4. Nếu yêu cầu chẩn đoán cần tài liệu mà chưa được cung cấp: **dừng ở Evidence Gate**. Không chuyển vòng sang việc đo hoặc kiểm tra một bộ phận khác như phương án thay thế.
+5. Thiếu chỉ một tài liệu cụ thể: yêu cầu **chính xác tài liệu đó hoặc đoạn trích đúng phần**, tránh yêu cầu tải toàn bộ hồ sơ nếu không cần.
 
-```mermaid
-flowchart TD
-    B1["Bước 1: Tiếp nhận & Phân loại Hiện trạng<br/>(Đèn LED, Cảnh báo HMI, Hành vi thiết bị)"] --> B2["Bước 2: Định vị Đối tượng & Mạch điện trong Eplan<br/>(Full DT, Trang bản vẽ, Sơ đồ khối nguồn & I/O)"]
-    B2 --> B3["Bước 3: Phân tích Ranh giới Phần cứng & Đấu nối<br/>(Dò Connection.edc / Wiring.epdz: Nguồn nuôi, Dây cầu, Bus nội bộ)"]
-    B3 --> B4["Bước 4: Xây dựng Cây nguyên nhân theo xác suất<br/>(Lỏng dây cầu > Mất nguồn riêng > Kẹt cơ cấu > Hỏng linh kiện)"]
-    B4 --> B5["Bước 5: Kế hoạch Xử lý & Đo kiểm từng chân cực<br/>(Vị trí đo VOM, Quy trình Reset, Tiêu chuẩn nghiệm thu)"]
-```
+## 2. HARD GATES — kiểm soát trước bất kỳ thao tác
 
-### Bước 1: Tiếp nhận và chuẩn hóa hiện trạng (Symptom Intake)
-Thu thập và làm rõ 4 thông số hiện trường từ người dùng:
-- **Thiết bị nào còn nguồn / mất nguồn?** (Ví dụ: CPU có nguồn, module mở rộng mất nguồn).
-- **Trạng thái đèn chỉ thị (LED):** Đèn `RUN/STOP`, `ERROR`, `DIAG` trên PLC/Module; đèn `PWR`, `K1/K2` trên Safety Relay; đèn tín hiệu trên Sensor.
-- **Có cảnh báo lỗi trên HMI/PLC không?** Nếu CPU không báo lỗi, cần ghi nhận đây là manh mối then chốt (chứng tỏ bus logic vẫn lành lặn).
-- **Hành vi vật lý của máy:** Máy dừng ở bước nào, cơ cấu nào không chuyển động.
+### Gate S — Safety
+- Không hướng dẫn mở tủ, đo điện sống, tháo/siết dây, can thiệp khí nén, ép chạy van/xi lanh, force PLC hay bypass safety đối với nhân sự không đủ điều kiện.
+- Reset có thể khởi động lại hoặc làm cơ cấu chuyển động. **Không mặc định Reset là vô hại.** Chỉ hướng dẫn Reset theo đúng User Manual và điều kiện an toàn được xác minh; trước Reset nên ghi nhận mã lỗi và trạng thái nếu tài liệu yêu cầu.
+- Khi user nói “không đủ điều kiện an toàn”, **DỪNG**. Không đưa ra phép đo thay thế cũng đòi hỏi tiếp cận nguy hiểm.
 
-### Bước 2: Định vị đối tượng và mạch điện trong Eplan
-- Tra cứu vị trí trang và tọa độ sơ đồ của cụm thiết bị gặp sự cố trong `Bill_of_materials.XML` hoặc `Device.edc`.
-- Xác định sơ đồ nguyên lý tổng thể của trang (ví dụ Trang 3: `PLC - Devices`, Trang 4: `Button`, Trang 5: `VFD`, Trang 7: `Sensor`).
+### Gate E — Evidence sufficiency (BLOCKING)
+Trước **mỗi** khuyến nghị, Agent phải tự kiểm:
+1. Có tài liệu **đúng hệ thống, đúng phiên bản, đúng thiết bị/part** không?
+2. Có dẫn chứng xác định được tên file + object/tag/pin/trang/section hoặc manual model + mục không?
+3. Tài liệu đó có thực sự mô tả hành vi, trạng thái, chức năng điện đang khẳng định không?
+4. Dữ liệu hiện trường đã đủ tin cậy, có mâu thuẫn với dữ liệu khác không?
+5. Chỉ dẫn này có thể làm thay đổi trạng thái hoặc gây nguy hiểm không? Nếu có, thủ tục an toàn có được xác minh không?
 
-### Bước 3: Phân tích ranh giới phần cứng & Dò chuỗi kết nối
-- Tra cứu file [Connection.edc](../../Export_ProjectData_Sanitized/External_editing/Connection.edc) và [Wiring.epdz](../../Export_ProjectData_Sanitized/External_editing/Wiring.epdz):
-  - **Dò đường cấp nguồn dương ($+24\text{ V DC}$):** Kiểm tra xem nguồn đi từ đâu đến, có đi qua tiếp điểm rơ-le an toàn hay tiếp điểm phụ không.
-  - **Dò chuỗi cầu nguồn (Daisy-chain):** Kiểm tra các đoạn dây cầu nối tiếp giữa các thiết bị (ví dụ từ chân `1K1:X10:1` sang `1K4:X10:1` rồi sang `2K1:X10:1`).
-  - **Dò đường mass chung ($0\text{ V DC}$):** Kiểm tra chân âm `M` và `Common` (`1M/2M`).
-  - **Dò nguồn tiếp điểm công suất:** Kiểm tra các chân cấp nguồn cho tải riêng biệt (như chân `1L/2L` trên module ngõ ra relay).
+**Nếu một câu trả lời bắt buộc là `NO` hoặc `UNKNOWN`:**
+- Nêu: “Chưa đủ căn cứ để hướng dẫn bước kiểm tra/Reset này.”
+- Chỉ ra **chính xác** tài liệu/giá trị thiếu và lý do cần.
+- Yêu cầu user cung cấp hoặc xác minh tài liệu đó.
+- **DỪNG**: không đề xuất nhánh suy đoán, không hỏi kết quả đo mới, không đưa ra kế hoạch nối tiếp có thể khiến người dùng hành động.
 
-### Bước 4: Xây dựng cây nguyên nhân gốc rễ
-Sắp xếp nguyên nhân theo thứ tự xác suất giảm dần:
-1. *Cấp 1 — Lỗi cơ học đấu nối:* Tuột cosse, lỏng ốc siết, đứt dây cầu tại các điểm bấm 2 dây trên 1 cọc.
-2. *Cấp 2 — Mạch bảo vệ/An toàn ngắt:* Nút E-stop bị nhấn, rơ-le an toàn trip, nhảy aptomat nhánh, hở công tắc cửa.
-3. *Cấp 3 — Mất nguồn riêng của tải:* Đứt cầu chì hoặc mất nguồn cấp cho thanh cái relay.
-4. *Cấp 4 — Hỏng phần cứng hoặc cấu hình phần mềm:* Cháy module, xung đột địa chỉ, ngắn mạch chéo nội bộ.
+### Gate T — Electrical topology (BLOCKING for electrical reasoning)
+Để kết luận Power Flow hoặc đường dẫn điện, cần đồng thời: Device identity/Part, pin function, contact NO/NC/COM & điều kiện đóng, nguồn tham chiếu, topology đầy đủ, trạng thái vận hành phù hợp.
+- `Connection.edc` source-target **chỉ là quan hệ đấu nối**; không tự chứng minh nguồn đầu vào, điểm upstream, hướng dòng, hoặc continuity qua contacts.
+- Ký hiệu dây `24VDC`, `0VDC`, `EMG-VALVE` chỉ là nhãn, không đủ khẳng định nguồn ổn định và cùng net qua terminal chưa kiểm tra.
+- Nếu chưa đủ → yêu cầu đúng sơ đồ, manual, pin chart hoặc connection report còn thiếu; **DỪNG**.
+- **Case lỗi đã xác minh:** `5FR1` là Schneider ATV310 `SE.ATV310H037N4E`; `R1C` là COM của relay R1. Không được mô tả `5FR1:R1C` là nguồn upstream chỉ vì dây nối `JB01-24VDC:1:1` mang nhãn `24VDC`.
 
-### Bước 5: Đưa ra hướng xử lý và vị trí đo kiểm cụ thể
-- Chỉ định **chính xác tên cọc và chân cực** cần đo đồng hồ VOM (ví dụ: *"Đặt que đo đỏ vào chân X10:1 của 1K4 và que đen vào chân X10:2 của 1K1"*).
-- Hướng dẫn thao tác khắc phục an toàn: Siết ốc, cắm lại giắc, kiểm tra tiếp xúc cosse.
-- Hướng dẫn chu trình Reset / Khởi động lại hệ thống sau khi khắc phục xong.
+### Gate M — Measurement verification
+- “OL” không có nghĩa cố định nếu chưa rõ V/Ω/continuity, meter range, điểm đo và trạng thái nguồn.
+- Dấu `+/-`, điện áp âm, điện áp dao động cần xác minh probe/reference, tải ON/OFF, thời điểm, phương pháp đo an toàn.
+- Nếu số đo mâu thuẫn logic hoặc thay đổi theo lượt, **dừng phép suy luận và yêu cầu xác nhận phương pháp**, không cộng dồn các số đo như sự thật chắc chắn.
 
----
+## 3. Intake: câu hỏi trước khi dùng nhánh Troubleshooting
 
-## 3. Các ca điển hình đã kiểm chứng trong dự án
+Thu thập ít nhất thông tin đủ để chọn **một** bước tiếp theo:
+- Máy/project và revision tài liệu; đang **commissioning**, vận hành ổn định, hay **vừa bảo trì/thay đổi**?
+- Triệu chứng, tag, alarm code, HMI message, thời điểm/bước sequence xuất hiện.
+- **Đã Reset chưa?** Nếu có: Reset loại nào, theo quy trình nào, kết quả gì? Nếu chưa: **không hướng dẫn Reset** khi chưa tra User Manual/điều kiện an toàn.
+- Các dấu hiệu nguy hiểm hiện có; quy định thao tác của nhà máy.
+- Có User Manual, Alarm List, Interlock Matrix, Sequence, Mechanical/Pneumatic docs và EPLAN phù hợp chưa?
 
-### Ca 1: Rơ-le an toàn `15K4` TRIP (Safety System Cut-off)
-* **Hiện tượng:** Máy dừng khẩn, đèn `PWR` trên 15K4 sáng nhưng đèn `K1/K2` tắt. Màn hình HMI báo mất kết nối PLC.
-* **Cơ chế từ Eplan:** Chân ngõ ra an toàn `15K4:14` mở ra $\rightarrow$ Cắt nguồn nuôi CPS (+) vào chân `1K1:X10:1` $\rightarrow$ Toàn bộ CPU S7-1200 và các module `1K4`, `2K1` mất nguồn, ngắt cưỡng bức mọi ngõ ra van và biến tần.
-* **Xử lý:** Kiểm tra giải tỏa các nút E-stop $\rightarrow$ Đo điện áp chờ tại chân `13` $\rightarrow$ Nhấn nhả nút Reset an toàn tại chân `S34` để kích hoạt lại (chế độ Manual Monitored Start).
+**Không dùng một biểu mẫu dài bắt buộc với người vận hành.** Khi đã có đủ bằng chứng, hỏi từng câu ngắn / một bước mỗi lượt. Khi thiếu tài liệu bắt buộc, câu hỏi duy nhất là yêu cầu tài liệu đó, và chờ.
 
-### Ca 2: CPU PLC vẫn RUN, không báo lỗi, nhưng các Module mở rộng mất nguồn
-* **Hiện tượng:** Đèn CPU S7-1200 `1K1` vẫn XANH (RUN), không có báo động mất phần cứng, nhưng toàn bộ cảm biến không nhận, van khí nén không tác động, máy treo cứng.
-* **Cơ chế từ Eplan:** CPU nuôi tầng logic của module mở rộng qua Backplane Bus $5\text{ V DC}$ nội bộ nên không báo lỗi thiếu module. Nguồn ngoại vi $24\text{ V DC}$ tại `X10:1` và `X10:2` được đấu cầu từ `1K1` sang `1K4` rồi sang `2K1`.
-* **Xử lý:** Đo VOM tại cọc `1K1:X10` (có 24V) đối chiếu với cọc `1K4:X10` (mất 24V) $\rightarrow$ Khoanh vùng chính xác đứt/tuột dây cầu đỏ `18/15528` hoặc dây trắng `18/15532` giữa CPU và module đầu tiên.
+## 4. Workflow Operation-Based, Evidence-Gated
 
----
+1. **Safety & Scope**: đánh giá an toàn, xác định phạm vi 1 device / group / system; phân biệt sự cố vận hành và commissioning.
+2. **Documentation availability gate**: kiểm User Manual / Alarm / Interlock / Sequence tương ứng. Thiếu → yêu cầu cung cấp và **DỪNG**.
+3. **Alarm, Reset & Operating State**: ghi nhận Alarm trước Reset, xác nhận Reset từng thực hiện và kết quả; chỉ hướng dẫn thao tác được manual cho phép và an toàn.
+4. **Sequence / Interlock / Feedback**: đối chiếu bước máy, permissives, sensor feedback và trạng thái cơ khí/khí nén có tài liệu.
+5. **EPLAN / Physical**: chỉ khi có bằng chứng phù hợp cho phép: tra Full DT + part + chính xác chân + topology + manual thiết bị, rồi mới chọn kiểm tra điện/cơ khí tại chỗ có thủ tục an toàn.
+6. **One discriminating action**: đúng **một** quan sát/câu hỏi hoặc phép kiểm tra an toàn mỗi lượt; lý do & giá trị kỳ vọng phải dựa vào nguồn đã nêu.
+7. **Update or stop**: sau kết quả, cập nhật giả thuyết và mâu thuẫn. Không lặp vô ích; khi thiếu bằng chứng, bất khả tiếp cận, tài liệu không bao quát, hoặc không tiến triển → **DỪNG & chuyển escalation tới người có thẩm quyền**, kèm điều còn thiếu; không suy đoán.
+8. **Recovery evidence**: chỉ ghi `RESOLVED` khi user xác nhận đã khắc phục và vận hành an toàn; ghi nhận nguyên nhân thực tế, biện pháp, và quan sát chưa giải thích được.
 
-## 4. Danh mục tài liệu tham chiếu
-- [Bản đồ thuộc tính Eplan](../../Content/02_PROPERTY_MAP.md)
-- [Nhật ký bài học kinh nghiệm](../../Content/06_LEARNING_LOG.md)
-- [Quy tắc kiểm tra cảm biến NPN/PNP & PLC Common](../../Content/06_LEARNING_LOG.md#2026-11-17--phương-pháp-kiểm-chứng-tương-thích-cảm-biến-npnpnp-và-ngõ-vào-plc)
-- [Quy trình 4 bước tra cứu nguyên lý thiết bị (LL-004)](../../Content/06_LEARNING_LOG.md#2026-11-17--ll-004-quy-trình-4-bước-tra-cứu-và-phân-tích-nguyên-lý-thiết-bị-approved)
+## 5. Định dạng phản hồi hiện trường
+
+**Nếu thiếu tài liệu:**
+> **Tạm dừng chẩn đoán — thiếu chứng cứ.** Tôi chưa có `[tài liệu / phần / revision]` để xác minh `[điều kiện, alarm, reset, interlock hoặc chức năng chân]`. Vui lòng cung cấp `[tài liệu cụ thể]`. Tôi sẽ không đề xuất kiểm tra/Reset/đấu nối tiếp khi chưa có căn cứ.
+
+**Nếu có đủ bằng chứng và an toàn:**
+> **Bước N — [mục tiêu đơn nhất]**. Căn cứ: `[document + section / object ID]`. Điều kiện an toàn: `[theo manual và người có thẩm quyền]`. Thao tác: `[1 hành động]`. Kết quả: `[Bình thường / Bất thường / Chưa rõ hoặc không an toàn]`.
+
+- Không nói “chắc chắn”, “relay hỏng”, “đảo cực” khi chỉ có triệu chứng.
+- Không tự phát sinh chân cấp nguồn, mã Alarm, phương thức Reset, vị trí cơ khí hoặc điều kiện Interlock.
+- Nếu phản hồi không có đủ căn cứ, trả lời thẳng **KHÔNG CÓ DỮ LIỆU / CHƯA XÁC MINH** và dừng.
+
+## 6. Tình huống kiểm chứng từ VALVE1
+
+**Quy trình 1 (thực tế):** người dùng xác nhận nguyên nhân là đầu dây nguồn module PLC mở rộng bị lỏng; khắc phục xong máy hoạt động. Không diễn giải phép đo `OL` hoặc điện áp đảo cực như nguyên nhân đã được xác minh.
+
+**Quy trình 2 (simulation, dừng tại bước 22):** Agent đi theo nhánh đo từng chân nguồn và nhầm `5FR1:R1C` (VFD relay contact) thành “nguồn upstream”; đây là **FAIL topology / FAIL evidence gate**. Kết quả người dùng nhập trong mô phỏng không phải ghi nhận hiện trường thực tế.
+
+**Bài học:** trước bước đo phần cứng, bắt buộc có cơ sở về vận hành/Alarm/Reset và chức năng mạch. Thiếu manual → yêu cầu cung cấp, **DỪNG**, không dùng EPLAN thay thế cho User Manual.
+
+## 7. Chính sách cập nhật và liên kết
+
+- V2.1 là **đề xuất chờ Technical Approver**. Không tự đánh dấu LL-006/LL-007 `APPROVED` hoặc ghi đè LL-005 đã được phê duyệt.
+- Test bắt buộc: `Tests/EDT-010_TROUBLESHOOTING_V2_1_EVIDENCE_GATE.md`.
+- Learning addendum: `Content/LL-006_LL-007_TROUBLESHOOTING_V2_1_PROPOSAL.md`.
+- Giữ nguồn hiện có: `Content/06_LEARNING_LOG.md` (LL-005) và EPLAN sanitized export.
+- `NOT_AVAILABLE` không được biến thành `INFERRED` ở bất kỳ chặng nào của workflow.

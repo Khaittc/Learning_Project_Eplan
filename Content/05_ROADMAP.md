@@ -43,6 +43,7 @@ Chỉ tạo parser/script khi cùng thao tác đã lặp lại đủ để cần
 
 - **EDT-005/F04 — APPROVED (rule):** Cable Route default Source Location → Target Location; raw endpoints preserved. Acceptance test for automatic location resolution and per-core joins remains PARTIAL. See [Cable Route rules](13_CABLE_ROUTE_LOCATION_RULES.md) and [EDT-005](../Tests/EDT-005_CABLE_ROUTE_AND_CORE_VALIDATION.md).
 - **EDT-009 — PENDING RE-TEST:** Re-export and compare BOM Object IDs after reopen, edit, copy, and delete/recreate; do not claim stable cross-snapshot object keys before evidence. See [EDT-009](../Tests/EDT-009_OBJECT_ID_STABILITY.md).
+- **EDT-010 — PENDING APPROVAL:** Evidence & Safety Gate cho chẩn đoán sự cố V2.1; 15/15 ca kiểm thử thực thi PASS. Đang chờ phê duyệt từ Technical Approver / Project Owner. Xem [EDT-010](../Tests/EDT-010_TROUBLESHOOTING_V2_1_EVIDENCE_GATE.md) và [LL-006 & LL-007](LL-006_LL-007_TROUBLESHOOTING_V2_1_PROPOSAL.md).
 
 ## Quy tắc cập nhật roadmap
 
