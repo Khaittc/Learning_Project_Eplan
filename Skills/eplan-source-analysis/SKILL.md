@@ -17,6 +17,32 @@ Trước khi đọc source/export của TTC, kiểm tra [trạng thái dữ li�
 4. Với layout, phân biệt **loại đối tượng của thiết bị** và **vùng bao quanh nó**. Ưu tiên quan hệ trực tiếp như `Mounting panel (identifying)`; cùng trang, cùng ô placement, hoặc cùng tên là dấu hiệu để kiểm tra tiếp, chưa tự chứng minh quan hệ bao.
 5. Ghi kết quả cùng đường dẫn nguồn và trạng thái chứng cứ: `trực tiếp`, `suy luận có cơ sở`, hoặc `chưa xác nhận`. Nêu rõ thuộc tính còn thiếu nếu câu hỏi cần tọa độ hay quan hệ hình học.
 6. Khi hỏi **tuyến cáp**, mặc định trả lời `Cable DT | Source Location | Target Location` theo quyết định `EDT-005/F04 APPROVED`; đồng thời giữ nguyên `Cable Source/Target` ở cấp Device (`20376/20377`) cho truy vết và tách riêng Endpoint Device/Pin của từng Core. Đọc [Cable Route addendum](CABLE_ROUTE_ADDENDUM.md); không tách Location từ DT bằng dấu `-` đơn giản.
+7. Khi hỏi **nguyên lý hoạt động, tài liệu đính kèm, hoặc trạng thái đèn/báo lỗi của thiết bị**, áp dụng quy trình 4 bước chuẩn hóa (LL-004 APPROVED): Tuyệt đối không suy diễn dựa trên ký tự DT; bóc tách mã part chính xác, quét link tài liệu hãng (`P22149` / `P22280`), đối chiếu sơ đồ chân đấu nối thực tế trong tủ (`Connection.edc`), và tra cứu tài liệu chính hãng để giải thích chi tiết.
+
+## Quy trình tra cứu tài liệu và phân tích nguyên lý thiết bị (LL-004 APPROVED)
+
+Để ngăn chặn việc suy luận chủ quan hoặc tạo sinh nội dung thiếu căn cứ (hallucination) khi người dùng hỏi về tài liệu kỹ thuật (Manual/Datasheet) hoặc nguyên lý vận hành sâu (trạng thái đèn LED, mã lỗi, chu trình reset), Agent phải tuân thủ nghiêm ngặt 4 bước:
+
+1. **Bóc tách mã linh kiện chuẩn (Part Master Data):**
+   - Lấy Full DT (`P20006`), Part Number (`P20100` / `P22001` / `P_ARTICLEREF_PARTNO`), Order Number (`P20919` / `P22003`), Nhà sản xuất (`P22007` / `P_ARTICLE_MANUFACTURER`).
+   - Kiểm tra `P22009` / `P_ARTICLE_NOTE` để lấy đoạn mô tả tóm tắt kỹ thuật gốc đa ngôn ngữ từ thư viện Eplan.
+2. **Tìm kiếm tài liệu & Hyperlink trong file Export:**
+   - Quét trường **`P22149`** trong `Project.epj`: Lấy URL tài liệu kỹ thuật trực tuyến / Datasheet chính hãng (ví dụ link Phoenix Contact, Siemens, Omron...).
+   - Quét trường **`P22280` / `P22279`** trong `Project_External_Document.aml`: Kiểm tra tài liệu PDF/DOC đính kèm offline nếu có trong dự án.
+   - Báo cáo rõ ràng tình trạng tài liệu: có link trực tuyến hay có file offline trong export.
+3. **Đối chiếu mạch đấu nối thực tế trong tủ (Circuit & Wiring Context):**
+   - Tra cứu [Connection.edc](../../Export_ProjectData_Sanitized/External_editing/Connection.edc) và [Wiring.epdz](../../Export_ProjectData_Sanitized/External_editing/Wiring.epdz):
+     - Xác định chân cấp nguồn (ví dụ A1 = 24VDC, A2 = 0VDC).
+     - Xác định tín hiệu kích hoạt / vòng lặp cảm biến (ví dụ S11, S12, S22).
+     - Xác định chế độ vận hành (ví dụ: chân S34 nối nút ấn Reset thì là *Manual Monitored Start*, nối tắt thì là *Auto Start*).
+     - Xác định tiếp điểm ngõ ra (ví dụ: chân 13-14 cấp nguồn an toàn cho khối nào).
+4. **Tra cứu tài liệu chuẩn của hãng và kết hợp với mạch thực tế:**
+   - Tra cứu đúng tài liệu/datasheet từ mã Part No để lấy thông tin chi tiết: bảng trạng thái LED, mã lỗi, thời gian trễ.
+   - **Tách bạch 3 trạng thái khi trình bày:**
+     - **Bình thường (Normal/Running):** Mạch an toàn thông, đã kích hoạt/reset, tiếp điểm an toàn đóng, LED nguồn và LED an toàn cùng sáng.
+     - **Trạng thái an toàn kích hoạt (Safety Tripped):** Sự cố hở mạch an toàn/nhấn E-stop, tiếp điểm an toàn mở ngắt nguồn máy, LED an toàn tắt.
+     - **Trạng thái chờ Reset (Awaiting Reset):** Hết sự cố nhưng chưa nhấn nút Reset, ngõ ra vẫn mở, LED an toàn vẫn tắt.
+   - Luôn phân biệt: **Đặc tính chung của thiết bị** vs. **Hành vi thực tế trong mạch của dự án**.
 
 ## Tích lũy kiến thức sau truy vấn
 

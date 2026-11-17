@@ -18,6 +18,12 @@ Các ID dưới đây được thấy trong export TTC hoặc đã đối chiế
 | Màu/số dây? | `Color/Number` / `31004` | `RD` là màu đỏ; `22` là số dây, không phải màu. |
 | Tiết diện? | `Cross-section/Diameter` / `31002` | Ví dụ `0.5` nghĩa là `0,5 mm²` khi đơn vị project là mm². |
 | PLC I/O? | `PLC address` / `20400` | Đối chiếu với function text và connection. |
+| Hyperlink / Datasheet trực tuyến? | `Hyperlink / External document` / `22149` | Link web tài liệu kỹ thuật / Datasheet gốc của hãng trong master part (`Project.epj`). |
+| File tài liệu đính kèm? | `External document: File / hyperlink` / `22280`, `Designation` / `22279` | Đường dẫn file tài liệu offline (PDF, DOC...) gán vào đối tượng/panel trong `Project_External_Document.aml`. |
+| Ghi chú kỹ thuật của Part? | `Part note / Technical description` / `22009`, `P_ARTICLE_NOTE` | Đoạn văn bản mô tả kỹ thuật chi tiết đa ngôn ngữ của hãng nhúng sẵn trong part master data. |
+| Macro 2D / 3D của Part? | `P_ARTICLE_MACRO` / `22010`, `P_ARTICLE_GROUPSYMBOLMACRO` / `22145` | Đường dẫn macro hình học/biểu tượng (`.ema`) của part. |
+| Ảnh sản phẩm Part? | `P_ARTICLE_PICTUREFILE` / `22045` | Đường dẫn file ảnh sản phẩm (`.jpg`, `.png`). |
+| Mã vạch / GTIN? | `GTIN` / `22208` | Mã vạch toàn cầu của sản phẩm. |
 
 ## Quy tắc kết hợp
 

@@ -87,3 +87,38 @@ Mỗi mục cần nêu **phát hiện → chứng cứ → cách áp dụng → 
 - **Giới hạn:** Quy tắc trình bày route được APPROVED, nhưng việc tự động lấy Location và nối tới từng Core chưa được xác nhận toàn diện; xem [EDT-005](../Tests/EDT-005_CABLE_ROUTE_AND_CORE_VALIDATION.md).
 - **Chưa chốt:** EDT-009 về độ ổn định Object ID; chờ export mới. Các số Used/Spare từ `Wiring.epdz` đang chờ re-test độc lập.
 
+## 2026-11-17 — Phương pháp kiểm chứng tương thích cảm biến (NPN/PNP) và ngõ vào PLC
+
+- **Phát hiện:** Tín hiệu cảm biến mang cùng Function text với địa chỉ PLC (ví dụ `7S5` và `I24.4` đều có text `SEN1-I`) không đồng nghĩa cảm biến đấu thẳng vào PLC. Khả năng đấu trực tiếp phụ thuộc vào hai yếu tố phần cứng: (1) Chuẩn ngõ ra của cảm biến (NPN vs PNP) và (2) Cực tính của chân Common (`1M/2M`) trên module Digital Input của PLC.
+- **Chứng cứ:**
+  - Cảm biến `=ST101+FD-7S5`: `P_FUNC_TECHNICAL_CHARACTERISTIC = NPN`, `AUTI.BRQM3M-PDTA` ([Bill_of_materials.XML](../Export_ProjectData_Sanitized/PLC/Bill_of_materials.XML)).
+  - Chuỗi kết nối ([Connection.edc](../Export_ProjectData_Sanitized/External_editing/Connection.edc)): Pin 2 của `7S5` kéo về chân 6 của rơ-le trung gian `=ST101+JB01-7K1` (Omron `G6B-1114P-FD-US`). Cuộn hút 7K1 cấp `24VDC` ở chân 1. Tiếp điểm NO (chân 4 nối `24VDC`, chân 3 ra dây `SEN1-I`) chuyển tín hiệu sang dạng đóng nguồn dương.
+  - Module PLC `=ET101+DDC-103-2K1` (Siemens SM 1223 `6ES7223-1PL32-0XB0`): Chân Common `X10:2/X10:3` (`1M`) đấu cố định vào `0VDC` ([Connection.edc](../Export_ProjectData_Sanitized/External_editing/Connection.edc)), nghĩa là nhóm DI này chỉ nhận mức kích dương `+24VDC` (Sink/PNP).
+- **Áp dụng:** Áp dụng phương pháp **"Dò chuỗi 3 điểm"** (Three-Point Verification) khi trả lời câu hỏi tương thích cảm biến - PLC:
+  1. Kiểm tra chuẩn ngõ ra cảm biến (`P_FUNC_TECHNICAL_CHARACTERISTIC` và part description: NPN hay PNP).
+  2. Lần theo chuỗi dây từ chân output (`Connection.edc` `P31019 -> P31020`): Nếu có rơ-le đệm hoặc bộ chuyển đổi opto, xác định mạch cuộn hút và tiếp điểm.
+  3. Kiểm tra điện áp đấu vào chân Common (`1M/2M`) của khối DI tương ứng trên PLC để biết PLC đang nhận Sink (+24V) hay Source (0V).
+- **Giới hạn:** Cần có file export Connection đầy đủ cả nguồn cấp cho Common PLC và chân cuộn hút rơ-le; nếu thiếu export connection của trạm trung gian, chỉ có thể kết luận ở mức "chưa xác nhận".
+
+## 2026-11-17 — LL-004: Quy trình 4 bước tra cứu và phân tích nguyên lý thiết bị (APPROVED)
+
+- **Quyết định đã phê duyệt:** Phê duyệt quy trình 4 bước chuẩn hóa khi tra cứu, phân tích nguyên lý hoạt động, trạng thái đèn LED và hành vi mạch của thiết bị, ngăn chặn việc suy luận chủ quan hoặc bịa đặt (hallucination).
+- **Bối cảnh thực tế:** Ca phân tích thiết bị `=ET101+DDC-103-15K4` (Rơ-le an toàn Phoenix Contact `PSR-MS35-1NO-24DC-SC` - mã `2904953`) khi người dùng hỏi về bản chất, tài liệu đính kèm (Manual/PDF) trong export, và trạng thái đèn LED ở chế độ Bình thường vs. Chế độ An toàn (Safety Tripped).
+- **Bản chất vấn đề & Ranh giới dữ liệu:**
+  - File export Eplan (`Bill_of_materials.XML`, `Device.edc`, `Project.epj`, `Project_External_Document.aml`) cung cấp khóa định danh, mã part, sơ đồ chân đấu nối, thông số tóm tắt, và hyperlink tài liệu hãng (`P22149` / `P22280`). File export **không chứa toàn văn User Manual hay bảng mã đèn LED nội bộ**.
+  - Không được suy đoán nguyên lý hoạt động chỉ dựa vào ký tự DT (như chữ `K` có thể là contactor, relay trung gian, hoặc safety relay).
+  - Không nhầm lẫn giữa **nguyên lý chung của linh kiện rời** với **hành vi thực tế trong mạch của tủ**.
+- **Quy tắc 4 bước (Chuẩn hóa):**
+  1. **Bước 1 — Định danh chính xác & Bóc tách Part No (Zero Guesswork):** Lấy Full DT (`P20006`), Part Number (`P20100` / `P22001` / `P_ARTICLEREF_PARTNO`), Order Number (`P20919` / `P22003`), Manufacturer (`P20921` / `P22007`).
+  2. **Bước 2 — Quét trường tài liệu & Hyperlink trong Eplan:**
+     - Quét `P22149` trong [Project.epj](../Export_ProjectData_Sanitized/Page/Project.epj): Tìm link Datasheet trực tuyến chính thức của hãng (`http://www.phoenixcontact.com/pi/products/2904953`).
+     - Quét `P22280` / `P22279` trong [Project_External_Document.aml](../Export_ProjectData_Sanitized/Page/Project_External_Document.aml): Kiểm tra tài liệu PDF/DOC đính kèm offline (nếu có).
+     - Đọc phần mô tả gốc của hãng trong `P22009` / `P_ARTICLE_NOTE` để nắm thông số cốt lõi.
+  3. **Bước 3 — Xác minh cấu hình đấu nối thực tế trong tủ (Project Wiring Context):**
+     - Tra cứu [Connection.edc](../Export_ProjectData_Sanitized/External_editing/Connection.edc) / [Wiring.epdz](../Export_ProjectData_Sanitized/External_editing/Wiring.epdz): Xác định nguồn nuôi (`A1/A2`), cấu hình ngõ vào an toàn (`S11/S12/S22`), chế độ kích hoạt/Start (`S34`: Manual Monitored Start hay Auto Start), ngõ ra an toàn (`13-14` cấp cho tải nào).
+  4. **Bước 4 — Tra cứu tài liệu kỹ thuật chuẩn của hãng và kết hợp với mạch thực tế:**
+     - Sử dụng datasheet/manual chính hãng theo đúng Part No ở Bước 1 & Bước 2 để lấy thông tin chi tiết mà Eplan không lưu (bảng trạng thái LED, mã lỗi, chu trình reset).
+     - Phân định rõ ràng: Thông tin nào từ file export Eplan, thông tin nào tra cứu từ tài liệu hãng.
+     - Phân tách rõ các trạng thái vận hành: Bình thường (Normal/Running: LED `PWR` và `K1/K2` đều sáng ON) vs. An toàn kích hoạt (Safety Tripped: LED `PWR` sáng, `K1/K2` tắt OFF) vs. Chờ Reset (Awaiting Reset: `PWR` sáng, `K1/K2` tắt chờ nhấn nút S34).
+
+
