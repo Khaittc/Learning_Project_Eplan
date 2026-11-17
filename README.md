@@ -14,6 +14,7 @@ Thư mục này dùng để tra cứu bản vẽ từ **dữ liệu Eplan**, đ�
 | [`Scripts/`](Scripts/) | Tracked | Bộ công cụ tự động hóa làm sạch dữ liệu export Eplan theo Schema (`sanitize_eplan.py`, `sanitize_config.json`). |
 | [`Part/`](Part/) | Tracked | Dữ liệu part rời do người dùng export (`ME-M-0001.xml`, `ME-M-0001_V2.xml`). |
 | [`Skills/eplan-source-analysis/`](Skills/eplan-source-analysis/) | Tracked | Skill tra cứu Eplan có thể tái sử dụng cho các dự án khác. |
+| [`Skills/eplan-troubleshooting/`](Skills/eplan-troubleshooting/) | Tracked | Skill chẩn đoán và xử lý sự cố (Troubleshooting) kết hợp hiện trạng hiện trường và mạch Eplan. |
 | [`Tests/`](Tests/) | Tracked | Hồ sơ kiểm chứng kỹ thuật và kế hoạch kiểm thử (EDT-005, EDT-009). |
 | [`AGENTS.md`](AGENTS.md) | Tracked | Điểm vào cho Agent và quy tắc cập nhật kiến thức sau mỗi phát hiện. |
 | `Export_ProjectData/` | Ignored | Thư mục export Eplan gốc của dự án (Lưu cục bộ, không commit lên Git vì chứa thông tin riêng). |
@@ -36,4 +37,4 @@ Thư mục này dùng để tra cứu bản vẽ từ **dữ liệu Eplan**, đ�
 13. Khi tra cứu tuyến cáp theo Location, dùng [quy tắc tuyến cáp theo Location (EDT-005)](Content/13_CABLE_ROUTE_LOCATION_RULES.md).
 14. Xem hồ sơ kiểm thử cáp và lõi tại [EDT-005](Tests/EDT-005_CABLE_ROUTE_AND_CORE_VALIDATION.md) và kế hoạch kiểm chứng Object ID tại [EDT-009](Tests/EDT-009_OBJECT_ID_STABILITY.md).
 
-Skill tại [SKILL.md](Skills/eplan-source-analysis/SKILL.md) hướng dẫn cách áp dụng các tài liệu này cho câu hỏi mới.
+Các skill tại [eplan-source-analysis](Skills/eplan-source-analysis/SKILL.md) và [eplan-troubleshooting](Skills/eplan-troubleshooting/SKILL.md) hướng dẫn cách áp dụng các tài liệu này cho câu hỏi tra cứu dữ liệu và xử lý sự cố.

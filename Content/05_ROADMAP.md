@@ -15,6 +15,7 @@ Mục tiêu là trả lời câu hỏi về **mọi loại trang và đối tư�
 | Truy từng đoạn dây bằng `Connection.edc` | Đã kiểm chứng với CYL1 | 141 cặp Source–Target; xem [đánh giá report](09_REPORT_ONLY_AUDIT.md). |
 | Nối connection với lõi cáp và hai đầu cáp chỉ từ report | Đã kiểm chứng qua `Wiring.epdz` | `Wiring.epdz` (SQLite `manifest.db`) chứa trực tiếp Cable definition, Conductor placement và 151 merged connections; `Cable_v2.edc` chứa Source/Target cáp. |
 | Phân tích nguyên lý thiết bị và tra cứu tài liệu/Hyperlink | Đã kiểm chứng với `15K4` | `Project.epj` (`P22149` datasheet link), `Bill_of_materials.XML` (`P_ARTICLE_NOTE`), đối chiếu `Connection.edc` để xác định trạng thái đèn LED và chế độ Monitored Reset; xem [LL-004](06_LEARNING_LOG.md). |
+| Phân tích và xử lý sự cố hệ thống (Troubleshooting) | Đã kiểm chứng với `15K4` Trip và lỗi hở nguồn module S7-1200 | Kết hợp mô tả hiện trạng hiện trường và chuỗi đấu nối Daisy-chain trong `Connection.edc` để khoanh vùng chính xác điểm hở mạch và hướng khắc phục; xem [LL-005](06_LEARNING_LOG.md) và [Skill Troubleshooting](../Skills/eplan-troubleshooting/SKILL.md). |
 
 ## Các chặng tiếp theo
 

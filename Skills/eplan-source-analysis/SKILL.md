@@ -65,5 +65,6 @@ Khi một truy vấn làm rõ thêm cách đọc Eplan, cập nhật tài liệu
 - [Quy tắc tuyến cáp theo Location](../../Content/13_CABLE_ROUTE_LOCATION_RULES.md)
 - [Hướng dẫn truy vấn tuyến cáp (Addendum)](CABLE_ROUTE_ADDENDUM.md)
 - [Tổng hợp cốt lõi dự án](../../Content/00_PROJECT_OVERVIEW.md)
+- [Kỹ năng xử lý sự cố Troubleshooting](../eplan-troubleshooting/SKILL.md)
 
 Các đường dẫn trên là tài liệu riêng của project TTC; khi dùng skill cho project khác, thay chứng cứ ca mẫu bằng export của project đó.

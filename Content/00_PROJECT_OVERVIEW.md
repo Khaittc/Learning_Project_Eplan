@@ -85,4 +85,5 @@ Mọi phát hiện mới phải được ghi lại theo chu trình:
 1. **[06_LEARNING_LOG.md](06_LEARNING_LOG.md)**: Ghi lại bài học kinh nghiệm, bằng chứng và giới hạn.
 2. **[05_ROADMAP.md](05_ROADMAP.md)**: Cập nhật trạng thái năng lực (Đã kiểm chứng / Chưa kiểm chứng).
 3. **[Skills/eplan-source-analysis/SKILL.md](../Skills/eplan-source-analysis/SKILL.md)**: Cập nhật quy tắc truy vấn tái sử dụng.
-4. **`README.md`**: Cập nhật mục lục tài liệu.
+4. **[Skills/eplan-troubleshooting/SKILL.md](../Skills/eplan-troubleshooting/SKILL.md)**: Cập nhật quy tắc chẩn đoán và xử lý sự cố.
+5. **`README.md`**: Cập nhật mục lục tài liệu.

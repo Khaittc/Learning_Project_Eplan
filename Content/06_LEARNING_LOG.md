@@ -121,4 +121,22 @@ Mỗi mục cần nêu **phát hiện → chứng cứ → cách áp dụng → 
      - Phân định rõ ràng: Thông tin nào từ file export Eplan, thông tin nào tra cứu từ tài liệu hãng.
      - Phân tách rõ các trạng thái vận hành: Bình thường (Normal/Running: LED `PWR` và `K1/K2` đều sáng ON) vs. An toàn kích hoạt (Safety Tripped: LED `PWR` sáng, `K1/K2` tắt OFF) vs. Chờ Reset (Awaiting Reset: `PWR` sáng, `K1/K2` tắt chờ nhấn nút S34).
 
+## 2026-11-17 — LL-005: Phương pháp phân tích và xử lý sự cố (Troubleshooting) kết hợp Hiện trạng hiện trường và Thiết kế Eplan
+
+- **Quyết định đã phê duyệt:** Chuẩn hóa kỹ năng và quy trình xử lý sự cố (Troubleshooting Framework) 5 bước khi người dùng cung cấp mô tả hiện trạng (đèn LED, âm thanh, đo đạc VOM, hành vi dừng máy), kết hợp với sơ đồ nguyên lý và chuỗi đấu dây Eplan (`Connection.edc`, `Wiring.epdz`).
+- **Bối cảnh thực tế:**
+  1. *Ca 1 (`15K4` Trip):* Safety relay ngắt tiếp điểm 13-14 $\rightarrow$ Cắt toàn bộ nguồn nuôi CPS (+) vào chân `1K1:X10:1` $\rightarrow$ Toàn bộ CPU S7-1200 và các module mở rộng `1K4`, `2K1` mất nguồn, ngắt cưỡng bức mọi ngõ ra van và biến tần.
+  2. *Ca 2 (CPU S7-1200 vẫn RUN, không báo mất module, nhưng các module mở rộng mất nguồn):* Phân tích sự tách biệt giữa nguồn logic (Backplane Bus 5VDC nuôi chip vi xử lý từ CPU) và nguồn ngoại vi (Field power 24VDC tại giắc X10). Dò chuỗi đấu nối daisy-chain (`1K1:X10:1 -> 1K4:X10:1 -> 2K1:X10:1`) để xác định chính xác điểm đứt/lỏng dây cầu nguồn giữa CPU và module đầu tiên.
+- **Bản chất vấn đề & Ranh giới kỹ thuật:**
+  - Nếu chỉ chẩn đoán theo lý thuyết chung mà không tra cứu sơ đồ Eplan, Agent sẽ đoán mò, không chỉ ra được chính xác chân cực (Terminal ID) và mã dây.
+  - Ngược lại, nếu chỉ đọc bản vẽ Eplan mà không kết hợp hiện trạng mô tả (đèn LED, đo đạc VOM từ người dùng), Agent sẽ không thể thu hẹp vùng nghi ngờ (Narrowing down root cause).
+  - Tách bạch rõ **tầng Logic/Bus nội bộ** (không báo lỗi thiếu module nếu CPU vẫn cấp 5V) với **tầng Công suất/Ngoại vi** (mất 24V khiến module không kích được ngõ ra).
+- **Quy trình 5 bước áp dụng:**
+  1. *Tiếp nhận & Chuẩn hóa hiện trạng:* Tách rõ cái gì bình thường, cái gì bất thường, đèn LED, cảnh báo HMI.
+  2. *Định vị đối tượng trên Eplan:* Full DT, trang bản vẽ, sơ đồ khối nguồn và I/O.
+  3. *Phân tích ranh giới phần cứng & Dò chuỗi kết nối:* Lần theo dây nguồn dương, dây mass chung, dây cầu daisy-chain và tiếp điểm an toàn.
+  4. *Lập cây nguyên nhân theo xác suất:* Lỗi cơ học đấu nối (tuột cosse/lỏng ốc) > Mạch bảo vệ ngắt (E-stop/Safety) > Mất nguồn riêng của tải > Hỏng phần cứng.
+  5. *Đưa ra hướng xử lý & vị trí đo kiểm cụ thể:* Chỉ định chính xác tên chân cực cần đo VOM và quy trình Reset phục hồi.
+- **Tài liệu hình thành:** Skill hoàn chỉnh được đóng gói tại [Skills/eplan-troubleshooting/SKILL.md](../Skills/eplan-troubleshooting/SKILL.md).
+
 
